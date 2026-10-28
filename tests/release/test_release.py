@@ -60,6 +60,15 @@ class MetadataTests(unittest.TestCase):
         value = json.loads(path.read_text()); del value['33']; path.write_text(json.dumps(value))
         with self.assertRaisesRegex(ValueError, 'smoke matrix'): release.metadata(self.root)
 
+    def test_screenshot_ref_rejects_unstable_branches(self):
+        path = self.root / 'appinfo/info.xml'
+        original = path.read_text()
+        ref = release.ET.fromstring(original).findtext('screenshot').split('/')[5]
+        for invalid in ('feature/screenshot', 'HEAD', 'a' * 39):
+            path.write_text(original.replace('/' + ref + '/screenshots/', '/' + invalid + '/screenshots/'))
+            with self.assertRaisesRegex(ValueError, 'Screenshot must reference'):
+                release.metadata(self.root)
+
     def test_screenshot_size_and_type(self):
         path = self.root / 'screenshots/admin-settings.png'
         path.write_bytes(b'not a PNG')

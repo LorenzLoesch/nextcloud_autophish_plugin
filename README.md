@@ -1,10 +1,22 @@
-# AutoPhish integration for Nextcloud
+# AutoPhish: Phishing Simulation & Training for Nextcloud
 
-[AutoPhish](https://autophish.io) is a phishing simulation platform that helps organizations test how employees respond to simulated phishing emails.
+[AutoPhish](https://autophish.io/) is a phishing simulation and security awareness training platform that helps organizations test how employees respond to simulated phishing emails.
 
 This integration supports Nextcloud phishing simulation workflows by keeping AutoPhish recipient lists up to date with selected Nextcloud groups. Map groups to dedicated target lists and synchronize memberships on a schedule or manually. Create campaigns, send simulations and review results in AutoPhish; this Nextcloud app handles recipient synchronization and does not provision AutoPhish accounts.
 
 Supported baseline: **Nextcloud 32–35, PHP 8.3+** (within Nextcloud's supported PHP range). License: [AGPL-3.0-or-later](license.md). Install **AutoPhish** (`integration_autophish`) from Nextcloud’s Apps administration through the [App Store](https://apps.nextcloud.com/apps/integration_autophish). The [release pipeline](docs/releasing.md) signs, verifies and publishes version tags automatically after the owner configures its credentials. Manual installation remains available as a fallback; local development builds are explicitly labelled `-unsigned`.
+
+## Screenshots
+
+### Administrator settings
+
+![AutoPhish connection and group-to-recipient-list mappings in Nextcloud](https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/d80493d0f89d434caf7e3606a2cd09e019a1a338/screenshots/admin-settings.png)
+
+### Synchronization status
+
+![AutoPhish synchronization results and membership counts in Nextcloud](https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/d80493d0f89d434caf7e3606a2cd09e019a1a338/screenshots/sync-status.png)
+
+Screenshots use demonstration data. The App Store proxies these images; newly published images may appear after its catalogue and image cache synchronize.
 
 ## Install and configure
 

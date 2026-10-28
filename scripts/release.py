@@ -38,12 +38,13 @@ def metadata(root=ROOT):
     screenshots = info.findall('screenshot')
     if not 2 <= len(screenshots) <= 3:
         raise ValueError('Two or three App Store screenshots are required')
-    prefix = 'https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/main/screenshots/'
+    prefix = 'https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/'
     for screenshot in screenshots:
         url = screenshot.text or ''
-        if not url.startswith(prefix) or not re.fullmatch(r'[a-z0-9-]+\.png', url[len(prefix):]):
-            raise ValueError('Screenshot must reference a committed HTTPS PNG on main')
-        path = root / 'screenshots' / url[len(prefix):]
+        match = re.fullmatch(re.escape(prefix) + r'(?:main|[a-f0-9]{40})/screenshots/([a-z0-9-]+\.png)', url)
+        if not match:
+            raise ValueError('Screenshot must reference a committed HTTPS PNG on main or an immutable commit')
+        path = root / 'screenshots' / match.group(1)
         if not path.is_file() or path.stat().st_size > 2 * 1024 * 1024 or path.read_bytes()[:8] != b'\x89PNG\r\n\x1a\n':
             raise ValueError('Screenshot missing, not a PNG or exceeds 2 MiB')
     notes(version, root)

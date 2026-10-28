@@ -17,7 +17,7 @@ No signing key is passed as a Docker environment variable or command argument. J
 ## Cut a release
 
 1. Update `appinfo/info.xml`, `package.json` and the root/package version entries in `package-lock.json` to the same version. Add a non-empty `## X.Y.Z` section to `CHANGELOG.md`, following Keep a Changelog. Supported versions are `X.Y.Z`, `X.Y.Z-beta.N` and `X.Y.Z-rc.N`.
-2. Run the checks below and merge the change to `main`. Keep screenshot URLs on `main` reachable before publishing.
+2. Run the checks below and merge the change to `main`. Keep screenshot URLs reachable before publishing; pin them to a public commit containing the images.
 3. From an up-to-date checkout of `main`, create and push the tag:
 
    ```sh
@@ -80,6 +80,8 @@ bash tests/release/signing.sh
 Use the current version in archive names. Unsigned builds are always named `-unsigned` and cannot be published by this pipeline. `RELEASE_ARCHIVE` can select a specific archive for smoke tests.
 
 The signing test generates a temporary CA and app key, replaces the trust root only in a disposable test image, checks two identical signed archives and release signatures, and then verifies that the unmodified official image rejects the same untrusted certificate. Production scripts contain no trust bypass, and the test artifacts are never uploaded. The real Nextcloud-issued certificate is tested only in the tag workflow.
+
+The public catalogue and screenshot proxy refresh separately from the app detail page. A successful upload can appear on the page before catalogue verification passes or screenshots display. Verify that source PNG URLs work, then allow upstream synchronization; do not replace an already published archive to clear an upstream cache. A screenshot proxy response can contain `File not found` even with HTTP 200, so check the image bytes as well as the status.
 
 ## Recover a failed release
 

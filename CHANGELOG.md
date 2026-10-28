@@ -2,6 +2,14 @@
 
 All notable changes are documented here in Keep a Changelog format. Versions follow Semantic Versioning.
 
+## 1.0.3
+
+### Changed
+
+- Clarify the App Store title and link AutoPhish directly from its description.
+- Pin App Store screenshots to permanent source URLs and add a directly viewable README gallery.
+- Document catalogue and screenshot proxy propagation after publication.
+
 ## 1.0.2
 
 ### Added

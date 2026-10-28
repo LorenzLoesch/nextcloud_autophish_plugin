@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
   <id>integration_autophish</id>
-  <name>AutoPhish</name>
+  <name>AutoPhish: Phishing Simulation &amp; Training</name>
   <summary>Connect Nextcloud groups to AutoPhish phishing simulations</summary>
   <description><![CDATA[## Nextcloud phishing simulation with AutoPhish
 
-AutoPhish is a phishing simulation platform that helps organizations test how employees respond to simulated phishing emails. Create and manage simulation campaigns in AutoPhish, using recipient lists kept current from your Nextcloud groups.
+[AutoPhish](https://autophish.io/) is a phishing simulation and security awareness training platform that helps organizations test how employees respond to simulated phishing emails. Create and manage simulation campaigns in AutoPhish, using recipient lists kept current from your Nextcloud groups.
 
 This integration connects your Nextcloud users to AutoPhish through selected group memberships:
 
@@ -26,7 +26,7 @@ Selected members' primary email addresses and, for new recipients, display names
 
 Administrators must authorize this transfer and verify recipient domains in AutoPhish before syncing. See the [AutoPhish privacy policy](https://autophish.io/privacy/service).
 ]]></description>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <licence>AGPL-3.0-or-later</licence>
   <author mail="support@autophish.io" homepage="https://autophish.io">QANDRYX Security GmbH</author>
   <namespace>IntegrationAutoPhish</namespace>
@@ -36,8 +36,8 @@ Administrators must authorize this transfer and verify recipient domains in Auto
   <website>https://autophish.io</website>
   <bugs>https://github.com/LorenzLoesch/nextcloud_autophish_plugin/issues</bugs>
   <repository type="git">https://github.com/LorenzLoesch/nextcloud_autophish_plugin</repository>
-  <screenshot>https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/main/screenshots/admin-settings.png</screenshot>
-  <screenshot>https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/main/screenshots/sync-status.png</screenshot>
+  <screenshot>https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/d80493d0f89d434caf7e3606a2cd09e019a1a338/screenshots/admin-settings.png</screenshot>
+  <screenshot>https://raw.githubusercontent.com/LorenzLoesch/nextcloud_autophish_plugin/d80493d0f89d434caf7e3606a2cd09e019a1a338/screenshots/sync-status.png</screenshot>
   <dependencies><php min-version="8.3"/><nextcloud min-version="32" max-version="35"/></dependencies>
   <background-jobs><job>OCA\IntegrationAutoPhish\BackgroundJob\SyncJob</job></background-jobs>
   <repair-steps><post-migration><step>OCA\IntegrationAutoPhish\Migration\Install</step></post-migration><install><step>OCA\IntegrationAutoPhish\Migration\Install</step></install><uninstall><step>OCA\IntegrationAutoPhish\Migration\Uninstall</step></uninstall></repair-steps>
