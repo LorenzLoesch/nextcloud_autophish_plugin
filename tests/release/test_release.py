@@ -24,7 +24,9 @@ def normalize_fixture_version(root):
     # Keep fixture expectations stable when maintainers bump the real release version.
     current = release.ET.parse(root / 'appinfo/info.xml').getroot().findtext('version')
     if current != '1.0.1':
-        for name in ('appinfo/info.xml', 'package.json', 'package-lock.json', 'CHANGELOG.md'):
+        fixture_notes = release.notes(current, root)
+        (root / 'CHANGELOG.md').write_text('# Changelog\n\n## 1.0.1\n\n' + fixture_notes + '\n')
+        for name in ('appinfo/info.xml', 'package.json', 'package-lock.json'):
             path = root / name
             path.write_text(path.read_text().replace(current, '1.0.1'))
 
@@ -84,13 +86,13 @@ class MetadataTests(unittest.TestCase):
 
     def test_platform_limit_ignores_unreleased(self):
         info = release.metadata(self.root)[0]
-        release.check_platforms(info, [{'version': '33.0.1', 'hasRelease': True}])
+        release.check_platforms(info, [{'version': '34.0.4', 'hasRelease': True}])
         with self.assertRaises(ValueError):
             release.check_platforms(info, [{'version': '32.0.1', 'hasRelease': True}, {'version': '99.0.0', 'hasRelease': False}])
 
     def test_store_checks_channel_and_bounds(self):
         info = release.metadata(self.root)[0]
-        entry = {'version': '1.0.1', 'isNightly': False, 'platformVersionSpec': '>=32.0.0 <35.0.0'}
+        entry = {'version': '1.0.1', 'isNightly': False, 'platformVersionSpec': '>=32.0.0 <36.0.0'}
         catalogue = [{'id': release.APP_ID, 'releases': [entry]}]
         self.assertEqual(release.verify_store(info, catalogue), entry['platformVersionSpec'])
         for field, value in [('isNightly', True), ('version', '1.0.0'), ('platformVersionSpec', '>=32.0.0 <34.0.0')]:

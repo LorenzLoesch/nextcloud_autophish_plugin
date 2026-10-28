@@ -1,8 +1,10 @@
 # AutoPhish integration for Nextcloud
 
-Mirror selected Nextcloud groups into dedicated AutoPhish target lists using the existing public API. This app does not send simulations or provision accounts.
+[AutoPhish](https://autophish.io) is a phishing simulation platform that helps organizations test how employees respond to simulated phishing emails.
 
-Supported baseline: **Nextcloud 32–34, PHP 8.3+** (within Nextcloud's supported PHP range). License: [AGPL-3.0-or-later](license.md). Install **AutoPhish** (`integration_autophish`) from Nextcloud’s Apps administration once the first signed release is published to the [App Store](https://apps.nextcloud.com/apps/integration_autophish). The [release pipeline](docs/releasing.md) signs, verifies and publishes version tags automatically after the owner configures its credentials. Manual installation remains available as a fallback; local development builds are explicitly labelled `-unsigned`.
+This integration supports Nextcloud phishing simulation workflows by keeping AutoPhish recipient lists up to date with selected Nextcloud groups. Map groups to dedicated target lists and synchronize memberships on a schedule or manually. Create campaigns, send simulations and review results in AutoPhish; this Nextcloud app handles recipient synchronization and does not provision AutoPhish accounts.
+
+Supported baseline: **Nextcloud 32–35, PHP 8.3+** (within Nextcloud's supported PHP range). License: [AGPL-3.0-or-later](license.md). Install **AutoPhish** (`integration_autophish`) from Nextcloud’s Apps administration through the [App Store](https://apps.nextcloud.com/apps/integration_autophish). The [release pipeline](docs/releasing.md) signs, verifies and publishes version tags automatically after the owner configures its credentials. Manual installation remains available as a fallback; local development builds are explicitly labelled `-unsigned`.
 
 ## Install and configure
 
@@ -50,6 +52,6 @@ Back up Nextcloud configuration/database. Replace the app directory with the new
 
 ## Development and verification
 
-Use PHP 8.3 and Node 24 (JavaScript syntax checks only). `composer install`, `npm ci`, `npm run lint`, `npm test`, `npm run build`. Tests mock every SaaS call. The archive uses an explicit runtime allowlist, deterministic timestamps/order/permissions and ships plain JavaScript/CSS without dev dependencies. `NEXTCLOUD_MAJOR=34 bash scripts/smoke-nextcloud.sh` selects the version (32, 33 or 34) for disposable install, upgrade, cron/command and concurrent offline cleanup checks with SQLite (default: 32). CI tests all three majors, plus `NEXTCLOUD_MAJOR=34 NEXTCLOUD_SMOKE_DB=pgsql` and `NEXTCLOUD_MAJOR=34 NEXTCLOUD_SMOKE_DB=mysql` for PostgreSQL and MariaDB. See [release checks and signing tests](docs/releasing.md#local-checks). Docker is required for smoke checks; no live tenant is needed.
+Use PHP 8.3 and Node 24 (JavaScript syntax checks only). `composer install`, `npm ci`, `npm run lint`, `npm test`, `npm run build`. Tests mock every SaaS call. The archive uses an explicit runtime allowlist, deterministic timestamps/order/permissions and ships plain JavaScript/CSS without dev dependencies. `NEXTCLOUD_MAJOR=35 bash scripts/smoke-nextcloud.sh` selects the version (32, 33, 34 or 35) for disposable install, upgrade, cron/command and concurrent offline cleanup checks with SQLite (default: 32). CI tests all four majors, plus `NEXTCLOUD_MAJOR=35 NEXTCLOUD_SMOKE_DB=pgsql` and `NEXTCLOUD_MAJOR=35 NEXTCLOUD_SMOKE_DB=mysql` for PostgreSQL and MariaDB. See [release checks and signing tests](docs/releasing.md#local-checks). Docker is required for smoke checks; no live tenant is needed.
 
 See [configuration](docs/configuration.md), [API client](docs/api-client.md) and [synchronization](docs/synchronization.md) for concise implementation behavior. Development docs/tests are in source only, outside the installable archive.

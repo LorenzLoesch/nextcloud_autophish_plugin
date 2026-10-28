@@ -2,6 +2,16 @@
 
 All notable changes are documented here in Keep a Changelog format. Versions follow Semantic Versioning.
 
+## 1.0.2
+
+### Added
+
+- Nextcloud 35 compatibility, verified with pinned installation, upgrade and database smoke checks.
+
+### Changed
+
+- Explain AutoPhish phishing simulations and the Nextcloud group synchronization workflow in the App Store listing.
+
 ## 1.0.1
 
 ### Added

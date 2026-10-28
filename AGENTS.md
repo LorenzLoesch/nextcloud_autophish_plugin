@@ -1,6 +1,6 @@
 # Integration app guide
 
-Use public Nextcloud APIs, PHP 8.3, Nextcloud 32–34 and Node 24. Keep runtime dependencies in Nextcloud; Composer/npm dependencies are development-only.
+Use public Nextcloud APIs, PHP 8.3, Nextcloud 32–35 and Node 24. Keep runtime dependencies in Nextcloud; Composer/npm dependencies are development-only.
 
 Keep tenant context explicit in every AutoPhish API request. Never export source user IDs, directory attributes, credentials or provider response text. All SaaS calls in tests must be mocked. Runtime smoke checks use disposable non-root containers with isolated networking.
 

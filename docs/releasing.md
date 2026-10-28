@@ -27,11 +27,11 @@ No signing key is passed as a Docker environment variable or command argument. J
    ```
 
    Use the next unused version for subsequent releases. Tagging an unmerged commit or a version different from the metadata fails verification before any publication.
-4. Review the Actions summary, the four GitHub assets and the App Store listing. On a disposable Nextcloud 34 instance, install `integration_autophish` from the store and run `occ integrity:check-app integration_autophish`; successful verification prints nothing. This live acceptance remains necessary for the first release once the owner has configured the real certificate and account.
+4. Review the Actions summary, the four GitHub assets and the App Store listing. On a disposable Nextcloud 35 instance, install `integration_autophish` from the store and run `occ integrity:check-app integration_autophish`; successful verification prints nothing. This live acceptance remains necessary for the first release once the owner has configured the real certificate and account.
 
 ## What the workflow verifies
 
-`ci.yml` is reusable from the tag workflow. It runs PHP/JavaScript tests, release guardrail tests, the official XSD, changelog/version checks and two byte-identical unsigned builds. The smoke matrix is pinned in `scripts/nextcloud-matrix.json`: Nextcloud 32, 33 and 34 with SQLite, plus PostgreSQL and MariaDB (`mysql` driver) on 34. Tests include installation, upgrade, cron/command execution, persisted sync state, concurrent disable and removal. All AutoPhish calls are mocked.
+`ci.yml` is reusable from the tag workflow. It runs PHP/JavaScript tests, release guardrail tests, the official XSD, changelog/version checks and two byte-identical unsigned builds. The smoke matrix is pinned in `scripts/nextcloud-matrix.json`: Nextcloud 32, 33, 34 and 35 with SQLite, plus PostgreSQL and MariaDB (`mysql` driver) on 35. Tests include installation, upgrade, cron/command execution, persisted sync state, concurrent disable and removal. All AutoPhish calls are mocked.
 
 Metadata must be covered by the matrix and `max-version` must not exceed the current stable major reported by the official App Store platform API plus one. Adding a major means adding its verified official image digest, extending the smoke coverage, and passing the tests before advertising it. A pinned digest never updates itself.
 
@@ -65,14 +65,15 @@ npm run lint
 npm test
 bash scripts/validate-info.sh
 npm run build
-cp dist/integration_autophish-1.0.1-unsigned.tar.gz /tmp/autophish-first.tar.gz
+cp dist/integration_autophish-1.0.2-unsigned.tar.gz /tmp/autophish-first.tar.gz
 npm run build
-cmp /tmp/autophish-first.tar.gz dist/integration_autophish-1.0.1-unsigned.tar.gz
+cmp /tmp/autophish-first.tar.gz dist/integration_autophish-1.0.2-unsigned.tar.gz
 NEXTCLOUD_MAJOR=32 npm run smoke
 NEXTCLOUD_MAJOR=33 npm run smoke
 NEXTCLOUD_MAJOR=34 npm run smoke
-NEXTCLOUD_MAJOR=34 NEXTCLOUD_SMOKE_DB=pgsql npm run smoke
-NEXTCLOUD_MAJOR=34 NEXTCLOUD_SMOKE_DB=mysql npm run smoke
+NEXTCLOUD_MAJOR=35 npm run smoke
+NEXTCLOUD_MAJOR=35 NEXTCLOUD_SMOKE_DB=pgsql npm run smoke
+NEXTCLOUD_MAJOR=35 NEXTCLOUD_SMOKE_DB=mysql npm run smoke
 bash tests/release/signing.sh
 ```
 

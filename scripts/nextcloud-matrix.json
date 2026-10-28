@@ -1,5 +1,6 @@
 {
   "32": "nextcloud:32.0.9-apache@sha256:a6faf7f884036fc754fbeef0a88177463df39f11ce699fb19edc4c2b7e481a47",
   "33": "nextcloud:33.0.9-apache@sha256:8f46dc79e9abf4f1e330ca9a7d9d9b8a8811ecc28f18018c1951281e522499e8",
-  "34": "nextcloud:34.0.4-apache@sha256:0e5688ba0988b9112cf03f9c6bab53eccb466d278435f6596f16c1f25acacf74"
+  "34": "nextcloud:34.0.4-apache@sha256:0e5688ba0988b9112cf03f9c6bab53eccb466d278435f6596f16c1f25acacf74",
+  "35": "nextcloud:35.0.2-apache@sha256:6f514aae04ad16917124064f7df851720c82b5ccb180b56cb787bed2ed8a7246"
 }
